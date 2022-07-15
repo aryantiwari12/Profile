@@ -1,0 +1,88 @@
+.box.border.float-end.mt-2 {
+    width: 200px;
+    height: 50px;
+}
+img.rounded-circle.w-25 {
+    margin-left: -136px;
+    height: 47px;
+}
+h5.text1 {
+    margin-top: -37px;
+    margin-left: 46px;
+}
+.box.border.mt-2 {
+    height: 52px;
+    /* height: 49px; */
+    width: 211px;
+}
+img.img11 {
+    width: 100px;
+}
+img.imgee {
+    width: 104px;
+}
+#hello{
+    text-decoration: none;
+    color: black;
+}
+i.fa-solid.fa-angle-right.text {
+    position: absolute;
+    margin-top: -24px;
+    margin-left: -543px;
+}
+h6.text-center {
+    position: absolute;
+    margin-left: 121px;
+    margin-top: -27px;
+}
+.col-4.text-end.mt-5.border {
+    margin-left: 322px;
+}
+p.text-danger {
+    position: absolute;
+    margin-top: -24px;
+    margin-left: 573px;
+}
+h6.text-danger {
+    position: absolute;
+    margin-top: -29px;
+    margin-left: 560px;
+}
+i.fa-solid.fa-camera {
+    position: absolute;
+    margin-top: -52px;
+    margin-left: -131px;
+}
+
+#dialog {
+    width: 218px;
+    position: absolute;
+    margin-top: 450px;
+    margin-left: 1098px
+}
+p.fs-5 {
+    margin-top: -3px;
+}
+h5#exampleModalLabel {
+    margin-left: 125px;
+}
+img.onn {
+    margin-top: -66px;
+}
+.container-fluid.bg-danger.p-5 {
+    margin-top: 306px;
+}
+.row.mt-2 {
+    margin-left: 15px;
+}
+.modal-content1 {
+    height: 400px;
+}
+button.border.mt-2.float-end {
+    /* margin-left: -48px; */
+    margin-right: 180px;
+    /* margin-top: -30px; */
+}
+i.fa-solid.fa-circle-check.text-success {
+    font-size: 64px;
+}
