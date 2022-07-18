@@ -86,3 +86,26 @@ button.border.mt-2.float-end {
 i.fa-solid.fa-circle-check.text-success {
     font-size: 64px;
 }
+.container.bg-white.w-25.shadow.rounded {
+    margin: 50px auto;
+}
+i.fa-solid.fa-envelope.text-danger {
+    position: absolute;
+    margin-top: 13px;
+    margin-left: 366px;
+}
+i.fa-solid.fa-eye-slash.text-danger {
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 366px;
+}
+i.fa-solid.fa-eye.text-danger {
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 366px;
+}
+i.fa-solid.fa-user.text-danger {
+    position: absolute;
+    margin-left: 366px;
+    margin-top: 11px;
+}

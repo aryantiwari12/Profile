@@ -3,13 +3,26 @@ import Header from './Header';
 import IMAGE1 from "./IMG/personal_info.png"
 import IMAGE2 from "./IMG/change_password.png"
 import IMAGE3 from "./IMG/notification_setting.png";
+import { useEffect, useRef, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 const Myaccounts = () => {
+
+    
+
+   useEffect(()=>{
+     if(!localStorage.getItem('token')){
+        Navigate('\Signin') 
+     }
+   },[])
+
   return (
     <div>
-      <Header />
-      <div className="container ">
+      
+      <Header/>
+     <div className="container ">
+     
         <div className='mt-5'>
           <h3 className='text-start'>My Account</h3>
         </div>
