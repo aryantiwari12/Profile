@@ -6,11 +6,13 @@ import Changepassword from './component/Changepassword';
 import Notificationsetting from './component/Notificationsetting';
 import Signin from './component/Signin';
 import Signup from './component/Signup';
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+        
           <Route path="/" element={<Signin />} />
           <Route path="/Myaccounts" element={<Myaccounts />} />
           {/* <Route path="/" element={<Myaccounts />} /> */}

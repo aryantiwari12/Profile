@@ -10,18 +10,45 @@ function Profile() {
 
     const base_url="http://139.59.47.49:4004";  // MAIN API
 
-    // const [name,setname]=useState("");
-    // const [address,setaddress]=useState("");
-    // const []
+    
   
+    const [code,setcode]=useState("")
 
     const [profiledata,setprofiledata]=useState({
-        first_name:"",
-        mobile_number:"",
-        address:"",
-        profile_image:"",
-        email:""
+        first_name:" ", 
+        mobile_number:" ",
+        address:" ",
+        profile_image:" ",
+        email:" "
+
     })
+    const [verifiedotp,setverfiedotp]=useState({
+           
+        input:"",
+        input1:"",
+        input2:"",
+        input3:""
+    })
+
+    const Changeingvalue = (e) => {
+        let name = e.target.name;
+        let value = e.target.value;
+
+        setprofiledata({
+            ...profiledata,
+            [name]: value
+        })
+
+        setverfiedotp({
+            ...verifiedotp,
+            [name]:value
+        })
+    }
+
+   
+    
+
+   
 
 
     let inputRef = useRef(null)
@@ -98,7 +125,7 @@ function Profile() {
     const Savename = async () => {
        
         const data = {
-            first_name:profiledata
+            first_name:profiledata.first_name
         }
         let res = axios.put(`http://139.59.47.49:4004/api/edit-profile`,data, {
 
@@ -113,7 +140,7 @@ function Profile() {
 
      const SaveLocation=async()=>{
         const data={
-            address:profiledata
+            address:profiledata.address
         }
         let res=axios.put(`http://139.59.47.49:4004/api/edit-profile`,data,{
             headers:{
@@ -125,9 +152,9 @@ function Profile() {
 
     const SaveEmail=async()=>{
         const data={
-            email:profiledata
+            email:profiledata.email
         }
-        let res=axios.put(`http://139.59.47.49:4004/api/edit-profile`,data,{
+        let res= await axios.put(`http://139.59.47.49:4004/api/edit-profile`,data,{
             headers:{
                 'Authorization': localStorage.getItem("token")
             }
@@ -139,7 +166,7 @@ function Profile() {
 
         const data={
             mobile_number:profiledata.mobile_number,
-            country_code:"+91"
+            country_code:code
         }
             
         let response=await axios.post(`http://139.59.47.49:4004/api/account/send/otp`,data,{
@@ -149,6 +176,64 @@ function Profile() {
         })
         console.log(response)
     }
+
+    const mobilenumbervalidation=()=>{
+        let mobilechack=/^[789][0-9]{8}$/;
+        document.getElementById("span1").style.display = "none"
+        document.getElementById("span2").style.display = "block"
+        if (mobilechack.test(profiledata.mobile_number)) {
+
+            document.getElementById("span2").innerHTML = "your mobile is valid";
+            document.getElementById("span2").style.color = "green";
+        }
+        else {
+
+            document.getElementById("span2").innerHTML = "your mobile is invalid";
+            document.getElementById("span2").style.color = "red";
+            return false;
+        }
+
+    }
+
+
+   
+
+
+
+    const Verifiedotpdata=async()=>{
+        const {input,input1,input2,input3}=verifiedotp
+        const data={
+            mobile_number:profiledata.mobile_number,
+            otp:`${input}${input1}${input2}${input3}`
+        }
+        let res=await axios.post(`http://139.59.47.49:4004/api/account/verify/otp`,data,{
+            headers:{
+                'Authorization': localStorage.getItem("token")
+            }
+        })
+        console.log(res)
+     }
+
+    const Savechangedata=async()=>{
+
+        const data={
+            first_name:profiledata.first_name,
+            mobile_number:profiledata.mobile_number,
+            address:profiledata.address,
+            email:profiledata.email
+        }
+        
+        let res=await axios.put(`http://139.59.47.49:4004/api/edit-profile`,data,{
+            headers:{
+                'Authorization': localStorage.getItem("token")
+            }
+        })
+        console.log(res)
+
+    }
+   
+
+  
 
     return (
         <div>
@@ -168,7 +253,7 @@ function Profile() {
                             <div className=' border mt-2 p-2'>
                                 <label>Name</label>
                                 <p className='text-danger'>Cancel</p>
-                                <input type={"text"} ref={inputRef4} value={profiledata.first_name} onChange={(e)=>setprofiledata(e.target.value)} className="form-control mt-2" alt='' />
+                                <input type="text" ref={inputRef4} value={profiledata.first_name} name="first_name" className="form-control mt-2" alt='' onChange={Changeingvalue} />
                                 <button className='text-danger border bg-white' onClick={changename}>Change</button>
                                 <button className='bg-danger border text-white mt-2' onClick={Savename}>Save</button>
                             </div>
@@ -177,7 +262,7 @@ function Profile() {
                             <div className=' border mt-2 p-2'>
                                 <label>Location</label>
                                 <p className='text-danger'>Cancel</p>
-                                <input type={"text"} ref={inputRef5} className="form-control mt-2" onChange={(e)=>setprofiledata(e.target.value)}  alt='' />
+                                <input type="text" ref={inputRef5} value={profiledata.address} name="address" onChange={Changeingvalue}  className="form-control mt-2"   alt='' />
                                 <button className='text-danger border bg-white'  onClick={ChangeLocation}>Change</button>
                                 <button className='bg-danger border text-white mt-2' onClick={SaveLocation}>Save</button>
                             </div>
@@ -186,7 +271,8 @@ function Profile() {
                             <div className=' border mt-2 p-2'>
                                 <label>Email</label>
                                 <p className='text-danger'>Cancel</p>
-                                <input type={"text"} ref={inputRef6} onChange={(e)=>setprofiledata(e.target.value)} className="form-control mt-2" alt='' />
+                                <input type="text" ref={inputRef6} value={profiledata.email} name="email" className="form-control mt-2" alt='' onChange={Changeingvalue}/>
+                               
                                 <button className='text-danger border bg-white' onClick={ChangeEmail}>Change</button>
                                 <button className='bg-danger border text-white mt-2' onClick={SaveEmail} >Save</button>
                             </div>
@@ -195,14 +281,15 @@ function Profile() {
                             <div className=' border mt-2 p-2'>
                                 <label>Mobile Number</label>
                                 <p className='text-danger'>Cancel</p>
-                                <input type={"text"} placeholder="India(+91)" className="form-control mt-2" alt='' />
+                                <input type="text" placeholder="India(+91)" id="countycode1"  onChange={(e)=>setcode(e.target.value)} className="form-control mt-2" alt='' />
                                 <div class="input-group mb-3 mt-2">
                                     <span class="input-group-text">+91</span>
 
-                                    <input type="text" ref={inputRef7} class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
+                                    <input type="text" ref={inputRef7}  id="mobile1" value={profiledata.mobile_number}   name="mobile_number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" onChange={Changeingvalue}/><br/>
+                                    <br/> <span className='text-start' id="span2"></span>
                                 </div>
                                 <button className='text-danger border bg-white' onClick={Changemobile}>Change</button>
-                                <button className='bg-danger border text-white mt-2' data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={verified}>Verify</button>
+                                <button className='bg-danger border text-white mt-2'  data-bs-toggle="modal" data-bs-target="#exampleModal2"  onClick={verified}>Verify</button>
                                 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -212,18 +299,18 @@ function Profile() {
                                             </div>
                                             <div class="modal-body p-5">
                                                 <h4 className='fs-6 text-center'>Enter the just send to</h4>
-                                                <h4 className='text-center fs-6'>+91</h4>
+                                                <h4 className='text-center fs-6'>+91{profiledata.mobile_number}</h4>
                                                 <div className='row mt-2'>
-                                                    <input ref={inputRef} autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) => onClick(e.target.value)} style={{ height: "60px", width: "60px" }} />
-                                                    <input ref={inputRef1} autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) => onClick1(e.target.value)} style={{ height: "60px", width: "60px" }} />
-                                                    <input ref={inputRef2} autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) => onClick2(e.target.value)} style={{ height: "60px", width: "60px" }} />
-                                                    <input ref={inputRef3} autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) => onClick3(e.target.value)} style={{ height: "60px", width: "60px" }} />
+                                                    <input ref={inputRef} value={verifiedotp.input} className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e)=>{onClick(e.target.value);Changeingvalue(e)}} name="input"  style={{ height: "60px", width: "60px" }} />
+                                                    <input ref={inputRef1} value={verifiedotp.input1} name="input1" autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) =>{onClick1(e.target.value);Changeingvalue(e)}} style={{ height: "60px", width: "60px" }} />
+                                                    <input ref={inputRef2}  value={verifiedotp.input2} name="input2" autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) => {onClick2(e.target.value);Changeingvalue(e)}} style={{ height: "60px", width: "60px" }} />
+                                                    <input ref={inputRef3} value={verifiedotp.input3} name="input3" autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) =>{onClick3(e.target.value);Changeingvalue(e)}} style={{ height: "60px", width: "60px" }} />
 
                                                 </div>
 
-                                                <button className='border mt-2 float-end' data-bs-toggle="modal" data-bs-target="#exampleModal3" >Verfied</button>
-
-
+                                                <button className='border mt-2 float-end' data-bs-toggle="modal" data-bs-target="#exampleModal4" onClick={Verifiedotpdata} >Verfied</button>
+                                                {/* #exampleModal3 */}
+   
                                             </div>
                                             <div class="modal-footer">
 
@@ -235,7 +322,7 @@ function Profile() {
 
                             </div>
 
-                            <button className='mt-2 w-100 border bg-danger text-white p-2 rounded'>Save Change</button>
+                            <button className='mt-2 w-100 border bg-danger text-white p-2 rounded' onClick={Savechangedata}>Save Change</button>
                         </div>
                     </div>
                     <div className='col-4 text-end mt-5 border w-25  h-25'>
@@ -278,7 +365,7 @@ function Profile() {
                         </div>
                         <div class="modal-body">
                         <i class="fa-solid fa-circle-check text-success "></i>
-                        <p>Your number +918500000023 is <br/>Verfied </p>
+                        <p>Your number  is <br/>Verfied </p>
                         <Link to="/Myaccounts">
                             <p>Go to Home</p>
                         </Link>
