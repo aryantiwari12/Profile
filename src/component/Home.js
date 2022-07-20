@@ -1,7 +1,6 @@
 import React from "react";
 import IMAGE from "./IMG/logo2x.png";
 import { useState, useRef, useEffect } from 'react';
-import '../CSS/style.css';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { Link } from 'react-router-dom';
@@ -44,10 +43,10 @@ const Home = () => {
 
 
 
-            <div className="container bg-white w-50 rounded">
+            <div className="container shadow bg-white w-50 rounded mt-5">
 
-                <div className="picture">
-                    <img src={IMAGE} alt="" className="mt-2" />
+                <div className="picture w-50">
+                    <img src={IMAGE} alt="" className="mt-2 w-25"/>
                 </div>
                 <div className="name mt-2">
                     <h1>Welcome to App</h1>

@@ -1,3 +1,5 @@
+
+
 .box.border.float-end.mt-2 {
     width: 200px;
     height: 50px;
@@ -108,4 +110,29 @@ i.fa-solid.fa-user.text-danger {
     position: absolute;
     margin-left: 366px;
     margin-top: 11px;
+}
+.picture.w-50 {
+    margin-left: 183px;
+}
+.col-4.border {
+    margin-left: 335px;
+    height: 150px;
+    width: 280px; 
+    margin-top: 55px;
+}
+i.fa-solid.fa-camera {
+    margin-top: 75px;
+    margin-left: -45px;
+    position: absolute;
+    font-size: 24px;
+}
+i.fa-solid.fa-photo-film.text-danger {
+    margin-right: 74px;
+    
+}
+i.fa-solid.fa-file-image.text-danger {
+    margin-right: 30px;
+}
+button.border-0.float-end {
+    margin-right: 7px;
 }

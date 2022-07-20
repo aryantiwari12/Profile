@@ -6,6 +6,9 @@ import Changepassword from './component/Changepassword';
 import Notificationsetting from './component/Notificationsetting';
 import Signin from './component/Signin';
 import Signup from './component/Signup';
+import Home from './component/Home';
+import Mobile from './component/Mobile';
+
 
 function App() {
   return (
@@ -13,7 +16,9 @@ function App() {
       <BrowserRouter>
         <Routes>
         
-          <Route path="/" element={<Signin />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/mobile" element={<Mobile />} />
+          {/* <Route path="/" element={<Signin />} /> */}
           <Route path="/Myaccounts" element={<Myaccounts />} />
           {/* <Route path="/" element={<Myaccounts />} /> */}
           <Route path="/Profile" element={<Profile />} />

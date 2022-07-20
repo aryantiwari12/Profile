@@ -2,7 +2,7 @@ import React from 'react'
 import IMAGE from "./IMG/logo.png";
 import IMAGE1 from "./IMG/1.png"
 import "./CSS/style.css";
-function Header() {
+function Header({name}) {
   return (
     <div>
 
@@ -14,7 +14,7 @@ function Header() {
             <div className='imglast'>
               <div className="box border shadow mt-2">
                 <img src={IMAGE1} className="rounded-circle w-25 border" alt=""/>
-                <h5 className="text1 text-danger">Jones Brother</h5>
+                <h5 className="text1 text-danger">{name}</h5>
               </div>
             </div>
             </div>
