@@ -8,6 +8,8 @@ import Signin from './component/Signin';
 import Signup from './component/Signup';
 import Home from './component/Home';
 import Mobile from './component/Mobile';
+import Forgetpass from './component/Forgetpass';
+import Reset from './component/Reset';
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/changepassword" element={<Changepassword/>} />
           <Route path="/Notificationsetting" element={<Notificationsetting/>} />
+          <Route path="Forgetpass" element={<Forgetpass/>}/>
+          <Route path="Reset" element={<Reset/>}/>
           {/* <Route path="/Myaccounts" element={<Myaccounts />} /> */}
           <Route path="/Signup" element={<Signup/>} />
           <Route path='/Signin' element={<Signin/>}/>

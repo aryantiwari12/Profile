@@ -7,11 +7,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
-const Myaccounts = () => {
+const Myaccounts = ({props}) => {
 
     
 
-   useEffect(()=>{
+   useEffect(()=>{ 
      if(!localStorage.getItem('token')){
         Navigate('\Signin') 
      }
@@ -20,7 +20,7 @@ const Myaccounts = () => {
   return (
     <div>
       
-      <Header/>
+      <Header name={props}/>
      <div className="container ">
      
         <div className='mt-5'>

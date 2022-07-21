@@ -13,7 +13,8 @@ function Profile() {
 
 
     const [code, setcode] = useState("")
-    const [file, setFile] = useState();
+    const [file, setFile] = useState(null);
+    const [store,setstore]=useState("")
     const fileRef = useRef();
     const [profiledata, setprofiledata] = useState({
         first_name: " ",
@@ -215,14 +216,47 @@ function Profile() {
         console.log(res)
     }
 
-    const Savechangedata = async () => {
+    // let filename;
+    const uploadImgae=async()=>{
+        if(file==null){
+            return ""
+        }
+        const url=`http://139.59.47.49:4004/api/upload/profile-image`;
+        const formdata=new FormData()
+        formdata.append("profile_image",file)
+        const config = {
+            headers: {
+              "content-type": "multipart/form-data",
+              'Authorization': localStorage.getItem("token") 
+            },
+      
+      
+          };
+      let res=await axios.post(url,formdata,config)
+      let filename =res.data.filename
+      Savechangedata(filename)
+    
+      setstore(filename)
+      
+      return filename
+      
+      
+        // .then((res)=>{
+        //     console.log(res)
+        //     filename=res.data.filename
+        //  await    Savechangedata(filename);
+        
+        
+          }
+
+ const Savechangedata = async (filename) => {
 
         const data = {
             first_name: profiledata.first_name,
             mobile_number: profiledata.mobile_number,
             address: profiledata.address,
             email: profiledata.email,
-            profile_image:profiledata.filename
+            profile_image:filename
         }
 
         let res = await axios.put(`http://139.59.47.49:4004/api/edit-profile`, data, {
@@ -237,37 +271,33 @@ function Profile() {
     const uploadfile = (e) => {
         console.log(e.target.files);
          setFile(e.target.files[0])
-        // setFile(URL.createObjectURL(e.target.files[0]));
+         
     }
 
-     let filename;
-    const uploadImgae=()=>{
-        const url='http://139.59.47.49:4004/api/upload/profile-image';
-        const formdata=new FormData()
-        formdata.append("profile_image",file)
-        const config = {
-            headers: {
-              "content-type": "multipart/form-data",
-              'Authorization': localStorage.getItem("token") 
-            },
-      
-      
-          };
-        axios.post(url,formdata,config)
-        
-        .then((res)=>{
-            console.log(res)
-            filename=res.data.filename
-        })
-
-        
-    }
-
+  
     const getimage= async ()=>{
-
         
-        let res=await axios.get("http://139.59.47.49:4004/api/profile")
-    }
+       await axios.get(`http://139.59.47.49:4004/api/profile`,{
+        headers:{
+            'Authorization': localStorage.getItem("token")
+        }
+       }).then((res)=>{
+          
+          let profiledata= localStorage.setItem("profileimage", res.data.profile.profile_image)
+          let s=localStorage.getItem(profiledata)
+          setFile(res.data.profile_image)
+          setstore(res.data.profile.profile_image)
+          setprofiledata(res.data.profile)
+          console.log(res.data.profile_image)
+       })
+    } 
+
+    useEffect(()=>{
+     getimage()   
+    },[])
+
+
+
 
     
 
@@ -358,12 +388,12 @@ function Profile() {
 
                             </div>
 
-                            <button className='mt-2 w-100 border bg-danger text-white p-2 rounded' onClick={Savechangedata}>Save Change</button>
+                            <button className='mt-2 w-100 border bg-danger text-white p-2 rounded' onClick={uploadImgae}>Save Change</button>
                         </div>
                     </div>
                     <div className='col-4 border rounded'>
                         <div className='rounded-circle w-50 h-75 mt-2 mx-auto d-block '>
-                            <img src={file ? URL.createObjectURL(file) : ""} className="w-100 rounded-circle h-100" alt="" />
+                            <img src={file ? URL.createObjectURL(file) :`http://139.59.47.49:4004/api/profile_image?profile_image=${store}`} className="w-100 rounded-circle h-100" alt="" />
                             <i class="fa-solid fa-camera text-danger" role="button" data-bs-toggle="dropdown"></i>
                             <ul class="dropdown-menu">
                                <input ref={fileRef}  hidden type="file" accept="image/*" onChange={uploadfile} />
@@ -380,7 +410,7 @@ function Profile() {
             </div>
 
 
-            <Footer />
+            <Footer/>
 
             <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
