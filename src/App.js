@@ -10,9 +10,12 @@ import Home from './component/Home';
 import Mobile from './component/Mobile';
 import Forgetpass from './component/Forgetpass';
 import Reset from './component/Reset';
-
+import { useState, useRef, useEffect } from 'react';
 
 function App() {
+
+ const [profiledata, setprofiledata] = useState()
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -21,7 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/mobile" element={<Mobile />} />
           {/* <Route path="/" element={<Signin />} /> */}
-          <Route path="/Myaccounts" element={<Myaccounts />} />
+          <Route path="/Myaccounts" element={<Myaccounts/>} />
           {/* <Route path="/" element={<Myaccounts />} /> */}
           <Route path="/Profile" element={<Profile />} />
           <Route path="/changepassword" element={<Changepassword/>} />

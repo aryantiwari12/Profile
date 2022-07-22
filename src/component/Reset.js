@@ -4,14 +4,14 @@ import { useState } from 'react';
 import axios from "axios";
 function Reset(){
 
-    const [oldpassword,setoldpassword]=useState("");
+    const [token,settoken]=useState("");
     const [newpassword,setnewpassword]=useState("");
 
 
     const submitdata=()=>{
 
         const data={
-            old_password:oldpassword,
+            token:token,
             new_password:newpassword
         }
 
@@ -38,7 +38,7 @@ function Reset(){
                 <h3>Reset your password</h3>
                 <>
                     <div className="mt-2">
-                        <input type="text" className="form-control" placeholder="old Password" value={oldpassword} onChange={(e)=>setoldpassword(e.target.value)} />
+                        <input type="text" className="form-control" placeholder="old Password" value={token} onChange={(e)=>settoken(e.target.value)} />
                         <input type="text" className="form-control mt-2" placeholder="new password" value={newpassword} onChange={(e)=>setnewpassword(e.target.value)} />
                     </div>
                     <button className="w-100 bg-danger mt-2 rounded border-0 text-white p-2" onClick={()=>submitdata()}>submit</button>

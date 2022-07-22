@@ -33,7 +33,7 @@ function Changepassword() {
        
     })
     console.log(res)
-    alert("update password")
+    alert("your are succefully update password thanku!!!")
    
   }
 

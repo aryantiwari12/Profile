@@ -3,7 +3,7 @@ import Footer from './Footer';
 import Header from './Header';
 import IMAGE from "./IMG/1.png";
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Navigate } from 'react-router-dom';
 import axios from 'axios';
 function Profile() {
 
@@ -11,6 +11,8 @@ function Profile() {
     const base_url = "http://139.59.47.49:4004";  // MAIN API
 
 
+
+    const [modal,setmodal]=useState()
 
     const [code, setcode] = useState("")
     const [file, setFile] = useState(null);
@@ -99,7 +101,7 @@ function Profile() {
     let inputRef5 = useRef(null)
     let inputRef6 = useRef(null)
     let inputRef7 = useRef(null)
-
+    
 
 
     const changename = () => {
@@ -119,10 +121,12 @@ function Profile() {
         inputRef7.current.value = '';
     }
 
-
-
-
-
+   const image=()=>{
+    const element = document.getElementById("demo");
+    element.remove();
+   }
+   
+   
 
     const Savename = async () => {
 
@@ -214,6 +218,7 @@ function Profile() {
             }
         })
         console.log(res)
+        
     }
 
     // let filename;
@@ -373,8 +378,8 @@ function Profile() {
                                                     <input ref={inputRef3} value={verifiedotp.input3} name="input3" autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) => { onClick3(e.target.value); Changeingvalue(e) }} style={{ height: "60px", width: "60px" }} />
 
                                                 </div>
-
-                                                <button className='border mt-2 float-end' data-bs-toggle="modal" data-bs-target="#exampleModal4" onClick={Verifiedotpdata} >Verfied</button>
+                                               
+                                               <button className='border mt-2 float-end' data-bs-toggle="modal" data-bs-target="#exampleModal4" onClick={Verifiedotpdata} >Verfied</button>
                                                 {/* #exampleModal3 */}
 
                                             </div>
@@ -391,15 +396,17 @@ function Profile() {
                             <button className='mt-2 w-100 border bg-danger text-white p-2 rounded' onClick={uploadImgae}>Save Change</button>
                         </div>
                     </div>
-                    <div className='col-4 border rounded'>
+                    <div className='col-4 border rounded p-2'>
                         <div className='rounded-circle w-50 h-75 mt-2 mx-auto d-block '>
-                            <img src={file ? URL.createObjectURL(file) :`http://139.59.47.49:4004/api/profile_image?profile_image=${store}`} className="w-100 rounded-circle h-100" alt="" />
+                            <img src={file ? URL.createObjectURL(file) :`http://139.59.47.49:4004/api/profile_image?profile_image=${store}`} id="demo" className="w-100 rounded-circle h-100" alt="" />
+                            <button className='bg-danger border-0 text-white rounded' onClick={image} >Remove image</button>
                             <i class="fa-solid fa-camera text-danger" role="button" data-bs-toggle="dropdown"></i>
                             <ul class="dropdown-menu">
                                <input ref={fileRef}  hidden type="file" accept="image/*" onChange={uploadfile} />
-                               <button onClick={()=>{fileRef.current.click();uploadImgae()}} className="border-0 bg-white float-end" ><i class="fa-solid fa-photo-film text-danger"></i>Gallery</button>
-                                <li><a class="dropdown-item text-end" href="#"><i class="fa-solid fa-file-image text-danger"></i>upload Photo</a></li>
-                                <li><a class="dropdown-item text-end" href="#"><i class="fa-duotone fa-camera-slash"></i>Remove Profile</a></li>
+                               <button onClick={()=>{fileRef.current.click();uploadImgae()}} className="border-0 bg-white float-end" ><i class="fa-solid fa-photo-film text-danger"></i>Gallery</button><br/>
+                               <button onClick={()=>{fileRef.current.click();uploadImgae()}} className="border-0 bg-white float-end" ><i class="fa-solid fa-file-image text-danger"></i>Upload photo</button>
+                                
+                                <li onClick={image}  className="border-0 bg-white"><a class="dropdown-item text-end" href="#"><i class="fa-solid fa-file-slash"></i>Remove Profile</a></li>
                             </ul>
 
 
@@ -421,7 +428,7 @@ function Profile() {
                         </div>
                         <div class="modal-body">
                             <i class="fa-solid fa-circle-check text-success "></i>
-                            <p>Your number  is <br />Verfied </p>
+                            <p>Your number  is {profiledata.mobile_number} <br />Verfied </p>
                             <Link to="/Myaccounts">
                                 <p>Go to Home</p>
                             </Link>
