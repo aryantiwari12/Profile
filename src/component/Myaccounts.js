@@ -17,6 +17,10 @@ const Myaccounts = ({props}) => {
      }
    },[])
 
+   const Logoutdata=()=>{
+    alert("hello")
+   }
+
   return (
     <div>
       
@@ -53,7 +57,7 @@ const Myaccounts = ({props}) => {
           </div>
         </div>
         <div className='logout border mt-5 p-2 rounded shadow'>
-          <p className='text-start mt-2 '><b>Logout</b><i class="fa-solid fa-right-from-bracket text-danger float-end" role="button"></i></p>
+          <p className='text-start mt-2 '><b>Logout</b><i class="fa-solid fa-right-from-bracket text-danger float-end" onClick={Logoutdata} role="button"></i></p>
         </div>
       </div>
       <Footer/>

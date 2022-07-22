@@ -270,6 +270,7 @@ function Profile() {
             }
         })
         console.log(res)
+        alert("your are succefully updated data ")
 
     }
 
@@ -396,11 +397,15 @@ function Profile() {
                             <button className='mt-2 w-100 border bg-danger text-white p-2 rounded' onClick={uploadImgae}>Save Change</button>
                         </div>
                     </div>
-                    <div className='col-4 border rounded p-2'>
+                    <div className='col-4 border  rounded p-2'>
                         <div className='rounded-circle w-50 h-75 mt-2 mx-auto d-block '>
+                            <div className='img-profiile'>
                             <img src={file ? URL.createObjectURL(file) :`http://139.59.47.49:4004/api/profile_image?profile_image=${store}`} id="demo" className="w-100 rounded-circle h-100" alt="" />
+                            </div>
+                          <div className='btun-icon'>
                             <button className='bg-danger border-0 text-white rounded' onClick={image} >Remove image</button>
                             <i class="fa-solid fa-camera text-danger" role="button" data-bs-toggle="dropdown"></i>
+                           
                             <ul class="dropdown-menu">
                                <input ref={fileRef}  hidden type="file" accept="image/*" onChange={uploadfile} />
                                <button onClick={()=>{fileRef.current.click();uploadImgae()}} className="border-0 bg-white float-end" ><i class="fa-solid fa-photo-film text-danger"></i>Gallery</button><br/>
@@ -408,7 +413,7 @@ function Profile() {
                                 
                                 <li onClick={image}  className="border-0 bg-white"><a class="dropdown-item text-end" href="#"><i class="fa-solid fa-file-slash"></i>Remove Profile</a></li>
                             </ul>
-
+                            </div>
 
                         </div>
                     </div>
