@@ -1,37 +1,30 @@
 import React from "react";
 import IMAGE from "./IMG/logo2x.png";
 import { useState, useRef, useEffect } from 'react';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { GoogleLogin} from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { Link } from 'react-router-dom';
 
 
-const clientId = "95373987300-ijc0gt9n8q3f3abqib4mkn73bq7a0j2p.apps.googleusercontent.com";
+const clientId = "287903283926-550kho5i6hb686m9r35h8vem5aco7oer.apps.googleusercontent.com";
 
 const Home = () => {
 
 
-    const [showloginButton, setShowloginButton] = useState(true);
+    
+  const responseGoogle=(res)=>{
+    console.log(res)
+  }
 
+    
 
-    const onLoginSuccess = (res) => {
-        console.log('Login Success:', res.profileObj);
-        setShowloginButton(false);
-    };
-    const onLoginFailure = (res) => {
-        console.log('Login Failed:', res);
-    };
-    const onSignoutSuccess = () => {
-        alert("You have been logged out successfully");
-        console.clear();
-        setShowloginButton(true);
+  
 
-    };
 
 
     const responseFacebook = (response) => {
         console.log(response);
-      }
+    }
 
 
 
@@ -46,7 +39,7 @@ const Home = () => {
             <div className="container shadow bg-white w-50 rounded mt-5">
 
                 <div className="picture w-50">
-                    <img src={IMAGE} alt="" className="mt-2 w-25"/>
+                    <img src={IMAGE} alt="" className="mt-2 w-25" />
                 </div>
                 <div className="name mt-2">
                     <h1>Welcome to App</h1>
@@ -63,14 +56,14 @@ const Home = () => {
 
                     {/* <button className="w-75 text-white rounded border-0 p-2" style={{ backgroundColor: "#EB4747" }}><i class="fa-brands fa-google float-start mt-2"></i>Continue with Google</button> */}
                     <div id="samedata">
-                        {showloginButton ?
+                        
                             <GoogleLogin
-                                clientId={clientId}
-                                buttonText="Login"
-                                onSuccess={onLoginSuccess}
-                                onFailure={onLoginFailure}
-                                cookiePolicy={'single_host_origin'}
-                            /> : null}
+                                clientId="287903283926-in74jhpb5bvmmqigsgo1k8jluhen3j9j.apps.googleusercontent.com"
+                                // buttonText="Sign In"
+                                onSuccess={responseGoogle}
+                                onFailure={responseGoogle}
+                                
+                            />
 
                     </div>
 

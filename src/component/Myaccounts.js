@@ -7,7 +7,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
-const Myaccounts = ({props}) => {
+import Profile from './Profile';
+const Myaccounts = ({usename}) => {
 
     
 
@@ -24,7 +25,7 @@ const Myaccounts = ({props}) => {
   return (
     <div>
       
-      <Header name={props}/>
+      <Header name={Profile.usename}/>
      <div className="container ">
      
         <div className='mt-5'>

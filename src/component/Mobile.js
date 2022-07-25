@@ -134,8 +134,8 @@ function Mobile() {
     return (
         <>
             <div className='container  w-50'>
-                <div className="container d-flex  bg-white rounded w-50 h-100 justify-content-center align-items-center mt-5">
-                    <div className="row" style={{ height: "350px", width: "450px" }}>
+                <div className="container  d-flex  bg-white rounded w-50 h-100 justify-content-center align-items-center mt-5">
+                    <div className="row "  style={{ height: "350px", width: "450px" }}>
                         <div className="modal-body">
                             <div className='col-12'>
                                 <img src={IMAGE} alt="" />

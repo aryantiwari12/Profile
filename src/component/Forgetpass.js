@@ -37,7 +37,7 @@ function Forgetpass() {
                         <input className="form-control mt-2" type="email" placeholder="Email" value={email} onChange={(e)=>setemail(e.target.value)} />
                     </div>
                     <Link to="/Reset">
-                    <button className="w-100 bg-danger rounded border-0 mt-5 p-2 text-white" onClick={()=>sendpass()}>Send reset link</button>
+                    <button type="submit" className="w-100  rounded border-0 mt-5 p-2 " onClick={()=>sendpass()} disabled={email.length===0}>Send reset link</button>
                     </Link>
                 </form>
             </div>

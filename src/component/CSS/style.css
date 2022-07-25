@@ -140,3 +140,10 @@ button.border-0.float-end {
     width: 130px;
     height: 100px;
 }
+button:disabled{
+    background-color: beige;
+}
+button:enabled{
+    background-color: #D61C4E;
+    color: white;
+}

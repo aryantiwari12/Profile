@@ -134,6 +134,7 @@ function Signup() {
                                 <input type="checkbox" required />
                             </div>
                             <div className='col-11 ms-0 ps-0'>
+
                                 <small class="hello">By clicking Create Account you agree to the<span className='text-danger'>
                                     <a href="hello" className='link-danger' alt="">Terms of service </a></span> and<span className='text-danger'><a href="hello" className='link-danger' alt=""> <br />Privacy policy</a></span></small>
                             </div>

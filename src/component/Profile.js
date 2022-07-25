@@ -8,11 +8,12 @@ import axios from 'axios';
 function Profile() {
 
 
-    const base_url = "http://139.59.47.49:4004";  // MAIN API
+    const base_url = "http://139.59.47.49:4004/api";  // MAIN API
 
 
-
-    const [modal,setmodal]=useState()
+    
+    
+    const [showModel,setShowModel] = useState(false);
 
     const [code, setcode] = useState("")
     const [file, setFile] = useState(null);
@@ -26,6 +27,7 @@ function Profile() {
         email: " "
 
     })
+    const usename=profiledata.first_name;
     const [verifiedotp, setverfiedotp] = useState({
 
         input: "",
@@ -129,11 +131,11 @@ function Profile() {
    
 
     const Savename = async () => {
-
+        //   http://139.59.47.49:4004/api/edit-profile
         const data = {
             first_name: profiledata.first_name
         }
-        let res = axios.put(`http://139.59.47.49:4004/api/edit-profile`, data, {
+        let res = axios.put(`${base_url}/edit-profile`, data, {
 
             headers: {
                 'Authorization': localStorage.getItem("token")
@@ -148,7 +150,7 @@ function Profile() {
         const data = {
             address: profiledata.address
         }
-        let res = axios.put(`http://139.59.47.49:4004/api/edit-profile`, data, {
+        let res = axios.put(`${base_url}/edit-profile`, data, {
             headers: {
                 'Authorization': localStorage.getItem("token")
             }
@@ -160,7 +162,7 @@ function Profile() {
         const data = {
             email: profiledata.email
         }
-        let res = await axios.put(`http://139.59.47.49:4004/api/edit-profile`, data, {
+        let res = await axios.put(`${base_url}/edit-profile`, data, {
             headers: {
                 'Authorization': localStorage.getItem("token")
             }
@@ -175,7 +177,7 @@ function Profile() {
             country_code: code
         }
 
-        let response = await axios.post(`http://139.59.47.49:4004/api/account/send/otp`, data, {
+        let response = await axios.post(`${base_url}/account/send/otp`, data, {
             headers: {
                 'Authorization': localStorage.getItem("token")
             }
@@ -208,15 +210,23 @@ function Profile() {
 
     const Verifiedotpdata = async () => {
         const { input, input1, input2, input3 } = verifiedotp
+      
         const data = {
             mobile_number: profiledata.mobile_number,
             otp: `${input}${input1}${input2}${input3}`
         }
-        let res = await axios.post(`http://139.59.47.49:4004/api/account/verify/otp`, data, {
+        let res = await axios.post(`${base_url}/account/verify/otp`, data, {
             headers: {
                 'Authorization': localStorage.getItem("token")
             }
         })
+        if(verifiedotp){
+            setShowModel("#exampleModal3")
+         }
+         else{
+            setShowModel(false)
+            alert("not verified number")
+         }
         console.log(res)
         
     }
@@ -226,7 +236,7 @@ function Profile() {
         if(file==null){
             return ""
         }
-        const url=`http://139.59.47.49:4004/api/upload/profile-image`;
+        const url=`${base_url}/upload/profile-image`;
         const formdata=new FormData()
         formdata.append("profile_image",file)
         const config = {
@@ -264,7 +274,7 @@ function Profile() {
             profile_image:filename
         }
 
-        let res = await axios.put(`http://139.59.47.49:4004/api/edit-profile`, data, {
+        let res = await axios.put(`${base_url}/edit-profile`, data, {
             headers: {
                 'Authorization': localStorage.getItem("token")
             }
@@ -283,7 +293,7 @@ function Profile() {
   
     const getimage= async ()=>{
         
-       await axios.get(`http://139.59.47.49:4004/api/profile`,{
+       await axios.get(`${base_url}/profile`,{
         headers:{
             'Authorization': localStorage.getItem("token")
         }
@@ -309,7 +319,7 @@ function Profile() {
 
     return (
         <div>
-            <Header name={profiledata.first_name}/>
+            <Header name={usename}/>
             <div className='container'>
                 <div className='mt-5'>
                     <Link to="/Myaccounts" id="hello">
@@ -379,8 +389,8 @@ function Profile() {
                                                     <input ref={inputRef3} value={verifiedotp.input3} name="input3" autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) => { onClick3(e.target.value); Changeingvalue(e) }} style={{ height: "60px", width: "60px" }} />
 
                                                 </div>
-                                               
-                                               <button className='border mt-2 float-end' data-bs-toggle="modal" data-bs-target="#exampleModal4" onClick={Verifiedotpdata} >Verfied</button>
+                                             
+                                               <button className='border mt-2 float-end' value={showModel} data-bs-toggle="modal" data-bs-target="#exampleModal3" onClick={Verifiedotpdata} >Verfied</button>
                                                 {/* #exampleModal3 */}
 
                                             </div>
@@ -400,7 +410,7 @@ function Profile() {
                     <div className='col-4 border  rounded p-2'>
                         <div className='rounded-circle w-50 h-75 mt-2 mx-auto d-block '>
                             <div className='img-profiile'>
-                            <img src={file ? URL.createObjectURL(file) :`http://139.59.47.49:4004/api/profile_image?profile_image=${store}`} id="demo" className="w-100 rounded-circle h-100" alt="" />
+                            <img src={file ? URL.createObjectURL(file) :`${base_url}/profile_image?profile_image=${store}`} id="demo" className="w-100 rounded-circle h-100" alt="" />
                             </div>
                           <div className='btun-icon'>
                             <button className='bg-danger border-0 text-white rounded' onClick={image} >Remove image</button>
