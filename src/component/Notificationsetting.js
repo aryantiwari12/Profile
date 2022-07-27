@@ -10,27 +10,70 @@ import addNotification from 'react-push-notification';
 function Notificationsetting() {
 
 
-  const [show,setshow]=useState(false)
+  const base_url = "http://139.59.47.49:4004/api";
 
-  const notificationshow= ()=>{
+  const [show, setshow] = useState(false)
 
-    
+  const notificationshow = () => {
+
+
 
     show ? setshow(false) : setshow(true)
-    
+
     addNotification({
       title: 'success',
-      native:true         
+      native: true
     })
 
-   
+
   }
 
- 
+  const [profiledata, setprofiledata] = useState({
+    first_name: " ",
+  })
+
+  const usename = profiledata.first_name;
+
+  const getimage = async () => {
+
+    await axios.get(`${base_url}/profile`, {
+      headers: {
+        'Authorization': localStorage.getItem("token")
+      }
+    }).then((res) => {
+
+      let profiledata = localStorage.setItem("profileimage", res.data.profile.profile_image)
+      let s = localStorage.getItem(profiledata)
+      //  setFile(res.data.profile_image)
+      //  setstore(res.data.profile.profile_image)
+      setprofiledata(res.data.profile)
+      console.log(res.data.profile_image)
+    })
+  }
+
+  useEffect(() => {
+    getimage()
+  }, [])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div>
-      <Header />
+      <Header name={usename} />
       <div className='container  mt-5'>
         <div className='mt-5'>
           <Link to="/Myaccounts" id="hello">
@@ -42,12 +85,12 @@ function Notificationsetting() {
         </div>
         <div className=''>
           <h3 className='text-start mt-5'>Notification settings</h3>
-          
-          <img src={show?IMAGE:IMAGE2} className="onn" onClick={notificationshow} role="button" alt="" />
+
+          <img src={show ? IMAGE : IMAGE2} className="onn" onClick={notificationshow} role="button" alt="" />
 
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

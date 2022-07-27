@@ -3,7 +3,7 @@ import Footer from './Footer';
 import Header from './Header';
 import IMAGE from "./IMG/1.png";
 import { useEffect, useRef, useState } from 'react';
-import { Link,Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 function Profile() {
 
@@ -11,13 +11,13 @@ function Profile() {
     const base_url = "http://139.59.47.49:4004/api";  // MAIN API
 
 
-    
-    
-    const [showModel,setShowModel] = useState(false);
+
+
+    const [showModel, setShowModel] = useState(false);
 
     const [code, setcode] = useState("")
     const [file, setFile] = useState(null);
-    const [store,setstore]=useState("")
+    const [store, setstore] = useState("")
     const fileRef = useRef();
     const [profiledata, setprofiledata] = useState({
         first_name: " ",
@@ -27,7 +27,7 @@ function Profile() {
         email: " "
 
     })
-    const usename=profiledata.first_name;
+    const usename = profiledata.first_name;
     const [verifiedotp, setverfiedotp] = useState({
 
         input: "",
@@ -103,7 +103,7 @@ function Profile() {
     let inputRef5 = useRef(null)
     let inputRef6 = useRef(null)
     let inputRef7 = useRef(null)
-    
+
 
 
     const changename = () => {
@@ -123,12 +123,12 @@ function Profile() {
         inputRef7.current.value = '';
     }
 
-   const image=()=>{
-    const element = document.getElementById("demo");
-    element.remove();
-   }
-   
-   
+    const image = () => {
+        const element = document.getElementById("demo");
+        element.remove();
+    }
+
+
 
     const Savename = async () => {
         //   http://139.59.47.49:4004/api/edit-profile
@@ -210,7 +210,7 @@ function Profile() {
 
     const Verifiedotpdata = async () => {
         const { input, input1, input2, input3 } = verifiedotp
-      
+
         const data = {
             mobile_number: profiledata.mobile_number,
             otp: `${input}${input1}${input2}${input3}`
@@ -220,58 +220,55 @@ function Profile() {
                 'Authorization': localStorage.getItem("token")
             }
         })
-        if(verifiedotp){
+        if (verifiedotp) {
             setShowModel("#exampleModal3")
-         }
-         else{
+        }
+        else {
             setShowModel(false)
             alert("not verified number")
-         }
+        }
         console.log(res)
-        
+
     }
 
     // let filename;
-    const uploadImgae=async()=>{
-        if(file==null){
+    const uploadImgae = async () => {
+        if (file == null) {
             return ""
         }
-        const url=`${base_url}/upload/profile-image`;
-        const formdata=new FormData()
-        formdata.append("profile_image",file)
+        const url = `${base_url}/upload/profile-image`;
+        const formdata = new FormData()
+        formdata.append("profile_image", file)
         const config = {
             headers: {
-              "content-type": "multipart/form-data",
-              'Authorization': localStorage.getItem("token") 
+                "content-type": "multipart/form-data",
+                'Authorization': localStorage.getItem("token")
             },
-      
-      
-          };
-      let res=await axios.post(url,formdata,config)
-      let filename =res.data.filename
-      Savechangedata(filename)
-    
-      setstore(filename)
-      
-      return filename
-      
-      
-        // .then((res)=>{
-        //     console.log(res)
-        //     filename=res.data.filename
-        //  await    Savechangedata(filename);
-        
-        
-          }
 
- const Savechangedata = async (filename) => {
+
+        };
+        let res = await axios.post(url, formdata, config)
+        let filename = res.data.filename
+        Savechangedata(filename)
+
+        setstore(filename)
+
+        return filename
+
+
+
+
+
+    }
+
+    const Savechangedata = async (filename) => {
 
         const data = {
             first_name: profiledata.first_name,
             mobile_number: profiledata.mobile_number,
             address: profiledata.address,
             email: profiledata.email,
-            profile_image:filename
+            profile_image: filename
         }
 
         let res = await axios.put(`${base_url}/edit-profile`, data, {
@@ -286,40 +283,40 @@ function Profile() {
 
     const uploadfile = (e) => {
         console.log(e.target.files);
-         setFile(e.target.files[0])
-         
+        setFile(e.target.files[0])
+
     }
 
-  
-    const getimage= async ()=>{
-        
-       await axios.get(`${base_url}/profile`,{
-        headers:{
-            'Authorization': localStorage.getItem("token")
-        }
-       }).then((res)=>{
-          
-          let profiledata= localStorage.setItem("profileimage", res.data.profile.profile_image)
-          let s=localStorage.getItem(profiledata)
-          setFile(res.data.profile_image)
-          setstore(res.data.profile.profile_image)
-          setprofiledata(res.data.profile)
-          console.log(res.data.profile_image)
-       })
-    } 
 
-    useEffect(()=>{
-     getimage()   
-    },[])
+    const getimage = async () => {
 
+        await axios.get(`${base_url}/profile`, {
+            headers: {
+                'Authorization': localStorage.getItem("token")
+            }
+        }).then((res) => {
 
+            let profiledata = localStorage.setItem("profileimage", res.data.profile.profile_image)
+            let s = localStorage.getItem(profiledata)
+            setFile(res.data.profile_image)
+            setstore(res.data.profile.profile_image)
+            setprofiledata(res.data.profile)
+            console.log(res.data.profile_image)
+        })
+    }
+
+    useEffect(() => {
+        getimage()
+    }, [])
 
 
-    
+
+
+
 
     return (
         <div>
-            <Header name={usename}/>
+            <Header name={usename} />
             <div className='container'>
                 <div className='mt-5'>
                     <Link to="/Myaccounts" id="hello">
@@ -389,8 +386,8 @@ function Profile() {
                                                     <input ref={inputRef3} value={verifiedotp.input3} name="input3" autoFocus className='col-3 border border-2 ms-4 text-center d-flex justify-content-center align-items-center' maxLength="1" onChange={(e) => { onClick3(e.target.value); Changeingvalue(e) }} style={{ height: "60px", width: "60px" }} />
 
                                                 </div>
-                                             
-                                               <button className='border mt-2 float-end' value={showModel} data-bs-toggle="modal" data-bs-target="#exampleModal3" onClick={Verifiedotpdata} >Verfied</button>
+
+                                                <button className='border mt-2 float-end' value={showModel} data-bs-toggle="modal" data-bs-target="#exampleModal3" onClick={Verifiedotpdata} >Verfied</button>
                                                 {/* #exampleModal3 */}
 
                                             </div>
@@ -410,19 +407,19 @@ function Profile() {
                     <div className='col-4 border  rounded p-2'>
                         <div className='rounded-circle w-50 h-75 mt-2 mx-auto d-block '>
                             <div className='img-profiile'>
-                            <img src={file ? URL.createObjectURL(file) :`${base_url}/profile_image?profile_image=${store}`} id="demo" className="w-100 rounded-circle h-100" alt="" />
+                                <img src={file ? URL.createObjectURL(file) : `${base_url}/profile_image?profile_image=${store}`} id="demo" className="w-100 rounded-circle h-100" alt="" />
                             </div>
-                          <div className='btun-icon'>
-                            <button className='bg-danger border-0 text-white rounded' onClick={image} >Remove image</button>
-                            <i class="fa-solid fa-camera text-danger" role="button" data-bs-toggle="dropdown"></i>
-                           
-                            <ul class="dropdown-menu">
-                               <input ref={fileRef}  hidden type="file" accept="image/*" onChange={uploadfile} />
-                               <button onClick={()=>{fileRef.current.click();uploadImgae()}} className="border-0 bg-white float-end" ><i class="fa-solid fa-photo-film text-danger"></i>Gallery</button><br/>
-                               <button onClick={()=>{fileRef.current.click();uploadImgae()}} className="border-0 bg-white float-end" ><i class="fa-solid fa-file-image text-danger"></i>Upload photo</button>
-                                
-                                <li onClick={image}  className="border-0 bg-white"><a class="dropdown-item text-end" href="#"><i class="fa-solid fa-file-slash"></i>Remove Profile</a></li>
-                            </ul>
+                            <div className='btun-icon'>
+                                <button className='bg-danger border-0 text-white rounded' onClick={image} >Remove image</button>
+                                <i class="fa-solid fa-camera text-danger" role="button" data-bs-toggle="dropdown"></i>
+
+                                <ul class="dropdown-menu">
+                                    <input ref={fileRef} hidden type="file" accept="image/*" onChange={uploadfile} />
+                                    <button onClick={() => { fileRef.current.click(); uploadImgae() }} className="border-0 bg-white float-end" ><i class="fa-solid fa-photo-film text-danger"></i>Gallery</button><br />
+                                    <button onClick={() => { fileRef.current.click(); uploadImgae() }} className="border-0 bg-white float-end" ><i class="fa-solid fa-file-image text-danger"></i>Upload photo</button>
+
+                                    <li onClick={image} className="border-0 bg-white"><a class="dropdown-item text-end" href="#"><i class="fa-solid fa-file-slash"></i>Remove Profile</a></li>
+                                </ul>
                             </div>
 
                         </div>
@@ -432,7 +429,7 @@ function Profile() {
             </div>
 
 
-            <Footer/>
+            <Footer />
 
             <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

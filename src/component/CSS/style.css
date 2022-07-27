@@ -140,10 +140,18 @@ button.border-0.float-end {
     width: 130px;
     height: 100px;
 }
-button:disabled{
-    background-color: beige;
+#hide:disabled{
+    background-color:floralwhite;
 }
-button:enabled{
+#hide:enabled{
     background-color: #D61C4E;
-    color: white;
+    color:white;
 }
+/* span#span2 {
+    
+    margin-right: 497px;
+}
+span#span1 {
+    
+    margin-right: 497px;
+} */

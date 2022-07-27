@@ -87,28 +87,6 @@ function Signup() {
  
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-  
-
    return (
         <div>
             <div className="container bg-white w-50 shadow rounded">
@@ -145,7 +123,6 @@ function Signup() {
                 </div>
 
                 <div className="continue mt-2">
-                    {/* <button class="w-100 rounded border-0 p-2 text-white" data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={() => singuppage()} style={{ backgroundColor: "#EB1D36" }}>Sign up</button> */}
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -163,28 +140,9 @@ function Signup() {
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
                 <div className="already mt-2">
-                    <p className="p-2" >You have already account?<Link to={'/Signin'}><a href="#"> Sign in</a></Link></p>
+                    <p className="p-2" >You have already account?<Link to={'/Signin'}><a href="#" className="text-danger"> Sign in</a></Link></p>
                 </div>
 
             </div>

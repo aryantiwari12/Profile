@@ -54,7 +54,7 @@ const Home = () => {
                 </div>
                 <div className="google mt-2">
 
-                    {/* <button className="w-75 text-white rounded border-0 p-2" style={{ backgroundColor: "#EB4747" }}><i class="fa-brands fa-google float-start mt-2"></i>Continue with Google</button> */}
+                    
                     <div id="samedata">
                         
                             <GoogleLogin
@@ -73,7 +73,7 @@ const Home = () => {
 
                 </div>
                 <div className="google mt-2">
-                    {/* <button className="w-75 text-white rounded border-0 p-2" style={{ backgroundColor: "#1F4690" }}><i class="fa-brands fa-facebook-f float-start mt-2"></i>Continue with Facebook</button> */}
+                    
                     <FacebookLogin
                         appId="547431080413859"
                         autoLoad={true}

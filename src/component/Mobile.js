@@ -60,15 +60,11 @@ function Mobile() {
 
             console.log("error")
         }
-        // setSignupwithphone({
-        //     code: "",
-        //     mobile: ""
-        // })
+       
 
         setComplete(false)
     }
     var id = document.getElementsByTagName('input')
-    // const token = otp.getToken()
     console.log(id)
     const onSend = () => {
         setOtp({
@@ -148,7 +144,7 @@ function Mobile() {
                                 <div className="mb-3">
                                     <input type="text" className="form-control" placeholder="Mobile Number" name="mobile" value={signupwithphone.mobile} onChange={CodemobileChange} />
                                 </div>
-                                <button type="submit" className="btn btn-danger w-100 mt-3 rounded" id="hide" data-bs-toggle="modal" data-bs-target="#myModal1" value="Continue" disabled={signupwithphone.code.length === 0 || signupwithphone.mobile.length === 0} >Continue</button>
+                                <button type="submit" className="btn btn-danger w-100 mt-3 rounded" data-bs-toggle="modal" data-bs-target="#myModal1" value="Continue" disabled={signupwithphone.code.length === 0 || signupwithphone.mobile.length === 0} >Continue</button>
                                 <p></p>
                             </form>
                             <p className="mt-4">You have already account?<span className="text-danger"><Link to="/signin">Sign'in</Link></span></p>

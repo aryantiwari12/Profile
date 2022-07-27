@@ -50,12 +50,11 @@ function Signin() {
                     <input type="password" className="form-control m-2 " placeholder="password" value={password} onChange={(e)=>setpassword(e.target.value)}/>
                     <h3 class="text-danger fs-6 text-end mt-2"><Link to={'/Forgetpass'}>Forget Password?</Link></h3>
                 </form>
-                {/* style={{ backgroundColor: "#EB1D36" }} */}
                 <button type="submit" value="continue" class="w-100 rounded  border-0 p-2 " id="hide" onClick={()=>submitdata()}  disabled={email.length===0 || password.length===0}>Sign in</button>
 
 
                 <div className="already mt-5">
-                    <p className="p-2">You have don't account then create?<Link to={'/Signup'}><a href="#">Sign Up</a></Link></p>
+                    <p className="p-2">You have don't account then create?<Link to={'/Signup'}><a href="#" className="text-danger">Sign Up</a></Link></p>
                 </div>
 
             </div>

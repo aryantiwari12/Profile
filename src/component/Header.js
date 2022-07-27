@@ -2,7 +2,7 @@ import React from 'react'
 import IMAGE from "./IMG/logo.png";
 import IMAGE1 from "./IMG/1.png"
 import "./CSS/style.css";
-function Header({name},{img}) {
+function Header({name}) {
 
   return (
     <div>
