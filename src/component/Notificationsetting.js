@@ -56,22 +56,7 @@ function Notificationsetting() {
   }, [])
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  return (
+return (
     <div>
       <Header name={usename} />
       <div className='container  mt-5'>

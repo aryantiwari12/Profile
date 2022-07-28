@@ -4,6 +4,9 @@ import { useState } from 'react';
 import axios from "axios";
 function Reset(){
 
+
+    const base_url = "http://139.59.47.49:4004/api";
+
     const [token,settoken]=useState("");
     const [newpassword,setnewpassword]=useState("");
 
@@ -15,7 +18,7 @@ function Reset(){
             new_password:newpassword
         }
 
-        axios.post("http://139.59.47.49:4004/api/account/reset/password",data,{
+        axios.post(`${base_url}/account/reset/password`,data,{
         
         headers:{
             'Authorization': localStorage.getItem("token")

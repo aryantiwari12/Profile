@@ -61,7 +61,7 @@ const Myaccounts = () => {
   return (
     <div>
 
-      <Header name={usename} />
+      <Header name={usename}/>
       <div className="container ">
 
         <div className='mt-5'>

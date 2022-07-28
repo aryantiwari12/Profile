@@ -28,6 +28,7 @@ function Profile() {
 
     })
     const usename = profiledata.first_name;
+    
     const [verifiedotp, setverfiedotp] = useState({
 
         input: "",
@@ -95,7 +96,7 @@ function Profile() {
         }
         else {
             inputRef2.current.focus();
-            // setComplete(false)
+            
         }
     }
 
@@ -231,7 +232,7 @@ function Profile() {
 
     }
 
-    // let filename;
+    
     const uploadImgae = async () => {
         if (file == null) {
             return ""
